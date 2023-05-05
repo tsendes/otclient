@@ -34,12 +34,30 @@ function init()
   clickerControlsWindow.onMouseRelease=base_reposition
 end
 
+-- Wait a second
+function wait(seconds)
+  local start = os.time()
+  repeat until os.time() > start + seconds
+end
+
 --
-function move_left(time)
+function moveLeft(time)
+  local windowX = clickerControlsWindow:getX()
+  local windowY = clickerControlsWindow:getY()
+  local buttonX = clickerButton:getX()
+  local buttonY = clickerButton:getY()
+
   while(movement)
   do
-    print(time)
-    wait(time)
+    if (buttonX + 30) <= windowX then
+      buttonX = windowX + 350
+      buttonY -= 30
+    end
+    if (buttonY + 30) <= windowY then
+      buttonY = windowY + 350
+    end
+
+    wait(1)
   end
 end
 
@@ -47,8 +65,8 @@ end
 function random_new_position()
   -- Defining position structure as {x,y} coordinates
   local new_pos = {
-    x=math.random(pos_init[1]+30,pos_init[1]+350),
-    y=math.random(pos_init[2]+30,pos_init[2]+350)
+    x=math.random(pos_init[1]+30, pos_init[1]+350),
+    y=math.random(pos_init[2]+30, pos_init[2]+350)
   }
   clickerButton:setPosition(new_pos)
 end
@@ -64,6 +82,7 @@ end
 function terminate()
   clickerControlsWindow:hide()
   clickerButton:setOn(false)
+  -- Disable movement event
   movement=0
    -- Free everything then proceed disconnecting this module from game
   clickerButton:destroy()
