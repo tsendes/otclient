@@ -4,7 +4,7 @@ clickerControlsWindow = nil
 buttonCancel = nil
 
 -- Initial position for screen as
-pos_init={}
+posInit={}
 movement=1
 
 -- Initial configurations for this module
@@ -28,10 +28,10 @@ function init()
   clickerControlsWindow:focus()
   
   -- Load initial x and y coordinates
-  table.insert(pos_init, clickerControlsWindow:getX())
-  table.insert(pos_init, clickerControlsWindow:getY())
+  table.insert(posInit, clickerControlsWindow:getX())
+  table.insert(posInit, clickerControlsWindow:getY())
 
-  clickerControlsWindow.onMouseRelease=base_reposition
+  clickerControlsWindow.onMouseRelease=baseReposition
 end
 
 -- Wait a second
@@ -62,20 +62,20 @@ function moveLeft(time)
 end
 
 -- Random a new position for clickerButton object
-function random_new_position()
+function randomNewPosition()
   -- Defining position structure as {x,y} coordinates
   local new_pos = {
-    x=math.random(pos_init[1]+30, pos_init[1]+350),
-    y=math.random(pos_init[2]+30, pos_init[2]+350)
+    x=math.random(posInit[1]+30, posInit[1]+350),
+    y=math.random(posInit[2]+30, posInit[2]+350)
   }
   clickerButton:setPosition(new_pos)
 end
 
--- Redefine pos_init after repositioning miniwindow
-function base_reposition()
+-- Redefine posInit after repositioning miniwindow
+function baseReposition()
   
-  pos_init[1]=clickerControlsWindow:getX()
-  pos_init[2]=clickerControlsWindow:getY()
+  posInit[1]=clickerControlsWindow:getX()
+  posInit[2]=clickerControlsWindow:getY()
 end
 
 -- Goodbye cruel world

@@ -37,7 +37,7 @@ clickBox < UIButton
     image-clip: 0 46 22 23
     text-offset: 0 1
 
-  @onClick: modules.game_clicker.random_new_position()
+  @onClick: modules.game_clicker.randomNewPosition()
 
 MainWindow
   id: clickerWindow
