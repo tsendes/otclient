@@ -1,10 +1,10 @@
--- defining empty variables to be used
+-- Defining empty variables to be used
 clickerButton = nil
 clickerControlsWindow = nil
 clickBox = nil
 
 -- Initial position for screen as
-pos_init={0, 0}
+pos_init={}
 
 -- Initial configurations for this module
 function init()
@@ -12,11 +12,15 @@ function init()
     onGameStart = online,
     onGameEnd = offline,
   })
-  clickerControlsWindow = g_ui.displayUI('clicker', modules.game_interface.getRightPanel())
+  clickerControlsWindow = g_ui.displayUI('clicker', 
+                                         modules.game_interface.getRightPanel())
   clickerButton = clickerControlsWindow:getChildById('clickBox')
+  -- Make it visible
   clickerControlsWindow:setOn(true)
-  clickerControlsWindow:focus()
   clickerButton:setOn(true)
+  
+  -- Set screen focus to this module
+  clickerControlsWindow:focus()
   
   -- Load initial x and y coordinates
   table.insert(pos_init, clickerControlsWindow:getX())
@@ -37,18 +41,17 @@ end
 function base_reposition()
   pos_init={clickerControlsWindow:getX(),
             clickerControlsWindow:getY()}
-  self.random_new_position()
+  random_new_position()
 end
 
 -- Goodbye cruel world
 function terminate()
-
   clickerControlsWindow:hide()
   clickerButton:setOn(false)
    -- Free everything then proceed disconnecting this module from game
   clickerButton:destroy()
-  clickerControlsWindow:destroy()
   clickBox:destroy()
+  clickerControlsWindow:destroy()
 
   disconnect(g_game, {
     onGameStart = online,
