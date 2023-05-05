@@ -1,4 +1,4 @@
--- Defining empty variables to be used
+-- Defining empty variables to be used as scoped visible
 clickerButton = nil
 clickerControlsWindow = nil
 clickBox = nil
@@ -8,12 +8,15 @@ pos_init={}
 
 -- Initial configurations for this module
 function init()
+  -- Connect with game module
   connect(g_game, {
     onGameStart = online,
     onGameEnd = offline,
   })
+  -- Create window
   clickerControlsWindow = g_ui.displayUI('clicker', 
                                          modules.game_interface.getRightPanel())
+  -- Create button object gathered from .otui
   clickerButton = clickerControlsWindow:getChildById('clickBox')
   -- Make it visible
   clickerControlsWindow:setOn(true)
