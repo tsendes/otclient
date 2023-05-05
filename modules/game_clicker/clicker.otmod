@@ -1,0 +1,9 @@
+Module
+  name: game_clicker
+  description: Random Button Clicker Window
+  author: Sendeski, Tiago
+  website: https://github.com/tsendes/otclient
+  sandboxed: true
+  scripts: [ clicker ]
+  @onLoad: init()
+  @onUnload: terminate()
