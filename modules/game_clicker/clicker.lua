@@ -1,10 +1,11 @@
 -- Defining empty variables to be used as scoped visible
 clickerButton = nil
 clickerControlsWindow = nil
-clickBox = nil
+buttonCancel = nil
 
 -- Initial position for screen as
 pos_init={}
+movement=1
 
 -- Initial configurations for this module
 function init()
@@ -18,6 +19,7 @@ function init()
                                          modules.game_interface.getRightPanel())
   -- Create button object gathered from .otui
   clickerButton = clickerControlsWindow:getChildById('clickBox')
+  buttonCancel = clickerControlsWindow:getChildById('buttonCancel')
   -- Make it visible
   clickerControlsWindow:setOn(true)
   clickerButton:setOn(true)
@@ -28,6 +30,17 @@ function init()
   -- Load initial x and y coordinates
   table.insert(pos_init, clickerControlsWindow:getX())
   table.insert(pos_init, clickerControlsWindow:getY())
+
+  clickerControlsWindow.onMouseRelease=base_reposition
+end
+
+--
+function move_left(time)
+  while(movement)
+  do
+    print(time)
+    wait(time)
+  end
 end
 
 -- Random a new position for clickerButton object
@@ -42,18 +55,19 @@ end
 
 -- Redefine pos_init after repositioning miniwindow
 function base_reposition()
-  pos_init={clickerControlsWindow:getX(),
-            clickerControlsWindow:getY()}
-  random_new_position()
+  
+  pos_init[1]=clickerControlsWindow:getX()
+  pos_init[2]=clickerControlsWindow:getY()
 end
 
 -- Goodbye cruel world
 function terminate()
   clickerControlsWindow:hide()
   clickerButton:setOn(false)
+  movement=0
    -- Free everything then proceed disconnecting this module from game
   clickerButton:destroy()
-  clickBox:destroy()
+  buttonCancel:destroy()
   clickerControlsWindow:destroy()
 
   disconnect(g_game, {
