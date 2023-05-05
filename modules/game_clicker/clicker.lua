@@ -51,7 +51,7 @@ function moveLeft(time)
   do
     if (buttonX + 30) <= windowX then
       buttonX = windowX + 350
-      buttonY -= 30
+      buttonY = buttonY - 30
     end
     if (buttonY + 30) <= windowY then
       buttonY = windowY + 350
