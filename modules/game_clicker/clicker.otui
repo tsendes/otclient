@@ -68,4 +68,4 @@ MainWindow
     anchors.bottom: parent.bottom
     @onClick: terminate()
 
-  @onDrag: modules.game_clicker.reposition()
+  @onDrag: modules.game_clicker.base_reposition()

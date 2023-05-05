@@ -37,7 +37,7 @@ end
 function base_reposition()
   pos_init={clickerControlsWindow:getX(),
             clickerControlsWindow:getY()}
-  self.onClick()
+  self.random_new_position()
 end
 
 -- Goodbye cruel world
